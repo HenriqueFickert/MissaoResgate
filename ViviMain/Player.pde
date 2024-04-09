@@ -9,7 +9,9 @@ class Player extends Agent {
   private void initializePlayer(){
     initialState = "IDLE";
     states = new ArrayList<State>();
-    states.add(new IdleState(this));
+    states.add(new Idle(this));
+    states.add(new Run(this));
+    states.add(new Die(this));
     initializeAgent();
   }
 }

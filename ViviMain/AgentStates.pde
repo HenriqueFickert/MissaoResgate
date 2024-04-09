@@ -1,6 +1,6 @@
-class IdleState extends State{
+class Idle extends State{
   
-  public IdleState(Agent agent){
+  public Idle(Agent agent){
     super("IDLE", agent);
   }
   
@@ -11,9 +11,9 @@ class IdleState extends State{
    void onExitState(){}
 }
 
-class RunState extends State{
+class Run extends State{
   
-  public RunState(Agent agent){
+  public Run(Agent agent){
     super("RUN", agent);
   }
   
@@ -24,26 +24,9 @@ class RunState extends State{
    void onExitState(){}
 }
 
-class JumpState extends State{
+class Die extends State{
   
-  public JumpState(Agent agent){
-    super("JUMP", agent);
-  }
-  
-   void onEnterState(){
-   agent.positionY += 200;
-   }
-  
-   void onDrawState(){
-   agent.positionY -= 10;
-   }
-  
-   void onExitState(){}
-}
-
-class DieState extends State{
-  
-  public DieState(Agent agent){
+  public Die(Agent agent){
     super("DIE", agent);
   }
   
