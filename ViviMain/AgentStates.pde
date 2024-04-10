@@ -4,9 +4,17 @@ class Idle extends State{
     super("IDLE", agent);
   }
   
-   void onEnterState(){}
+   void onEnterState(){
+     println(name);
+   }
   
-   void onDrawState(){}
+   void onDrawState(){
+      if(agent.agentInput.isRunning()){
+        agent.changeState("RUN");
+        return;
+      }
+        
+   }
   
    void onExitState(){}
 }
@@ -17,10 +25,29 @@ class Run extends State{
     super("RUN", agent);
   }
   
-   void onEnterState(){}
+   void onEnterState(){
+        println(name);
+      }
   
-   void onDrawState(){}
+  void onDrawState(){
+      if (!agent.agentInput.isRunning()) {
+          agent.changeState("IDLE");
+          return;
+      }
   
+      float newPositionX = agent.positionX + agent.speed * agent.agentInput.getDirection();
+
+      if (agent.agentInput.getDirection() == 1 && newPositionX > screenWidth - agent.sizeX - 50) {
+          agent.positionX = screenWidth - agent.sizeX - 50;
+      }
+      else if (agent.agentInput.getDirection() == -1 && newPositionX < 50) {
+          agent.positionX = 50;
+      }
+      else {
+          agent.positionX = newPositionX;
+      }
+  }
+
    void onExitState(){}
 }
 
@@ -30,7 +57,9 @@ class Die extends State{
     super("DIE", agent);
   }
   
-   void onEnterState(){}
+   void onEnterState(){
+     println(name);
+   }
   
    void onDrawState(){}
   

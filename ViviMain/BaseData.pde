@@ -1,6 +1,6 @@
 public abstract class WorldObject {
   public float positionX, positionY;
-  float sizeX = 100, sizeY = 100;
+  int sizeX = 100, sizeY = 100;
   String tag = "";
   PImage sprite;
  
@@ -65,7 +65,7 @@ public abstract class Scene {
 
 public abstract class State {
   String name = "";
-  Agent agent;
+  protected Agent agent;
   
   public State(String name, Agent agent){
     this.name = name;
@@ -77,4 +77,10 @@ public abstract class State {
   public abstract void onDrawState();
   
   public abstract void onExitState();
+}
+
+interface IAgentInput{
+  public void processInput(boolean[] keys);
+  public int getDirection();
+  public boolean isRunning();
 }

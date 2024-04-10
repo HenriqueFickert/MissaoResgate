@@ -3,19 +3,22 @@ class Game extends Scene {
     super(sceneId);
   }
   
+  Player player = new Player(300, 700);
+  
   void onClick(){}
     
-  void onKeyPressed(boolean [] keys){}
+  void onKeyPressed(boolean [] keys)
+  {
+    player.agentInput.processInput(keys);
+  }
     
-  void onKeyReleased(boolean [] keys){}
+  void onKeyReleased(boolean [] keys)
+  {
+    player.agentInput.processInput(keys);
+  }
     
   void onDraw(){
-    background(0);
-    handlePlayer();
-  }
-  
-  void handlePlayer() {
-    Player player = new Player(150, 150);
+    background(235);
     player.onDraw();
   }
 }

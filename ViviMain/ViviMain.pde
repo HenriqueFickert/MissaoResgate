@@ -3,11 +3,16 @@ import controlP5.*;
 
 Scene[] scenes;
 int currentScreen = 1;
-boolean [] keys = new boolean[128];
+
+final int LEFT_ARROW = 0;
+final int RIGHT_ARROW = 1;
+boolean [] keys = new boolean[2];
+
+final int screenHeight = 800, screenWidth = 600;
 
 void setup () {
    frameRate(60);
-   size(800, 600);
+   size(600, 800);
    scenes = new Scene[]{new Menu(0), new Game(1)};
 }
 
@@ -20,11 +25,13 @@ void mouseClicked() {
 }
 
 void keyPressed(){
-  keys[key] = true;
+  if (keyCode == LEFT) keys[LEFT_ARROW] = true;
+  if (keyCode == RIGHT) keys[RIGHT_ARROW] = true;
   scenes[currentScreen].onKeyPressed(keys);
 }
 
 void keyReleased() {
-  keys[key] = false;
+  if (keyCode == LEFT) keys[LEFT_ARROW] = false;
+  if (keyCode == RIGHT) keys[RIGHT_ARROW] = false;
   scenes[currentScreen].onKeyReleased(keys);
 }

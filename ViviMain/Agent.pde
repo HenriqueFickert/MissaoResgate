@@ -4,12 +4,16 @@ class Agent extends WorldObject {
   State previousState;
   String initialState;
    
+  float speed = 10;
+  
+  IAgentInput agentInput;
+   
   PImage[] [] sprites;
   
-  Agent(float startX, float startY)
+  Agent(float startX, float startY, IAgentInput agentInput)
   {
     super(startX, startY);
-    loadImageArchive("sprites/player.png");
+    this.agentInput = agentInput;
   }
    
   protected void initializeAgent()
@@ -20,7 +24,7 @@ class Agent extends WorldObject {
    
   void render()
   {
-    image(sprite.get(0,0,64,64)/*sprites[states.indexOf(currentState)][0]*/, positionX, positionY);
+    image(sprite.get(0,0,sizeX,sizeY)/*sprites[states.indexOf(currentState)][0]*/, positionX, positionY);
   }
    
   void onDraw()
