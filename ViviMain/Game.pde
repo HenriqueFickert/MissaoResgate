@@ -4,6 +4,7 @@ class Game extends Scene {
   }
   
   Player player = new Player(300, 700);
+  Enemy enemy = new Enemy(300, 100);
   
   void onClick(){}
     
@@ -20,5 +21,7 @@ class Game extends Scene {
   void onDraw(){
     background(235);
     player.onDraw();
+    enemy.onDraw();
+    enemy.agentInput.processInput(keys);
   }
 }

@@ -51,6 +51,38 @@ class Run extends State{
    void onExitState(){}
 }
 
+class RunVertical extends State{
+  
+  RunVertical(Agent agent){
+    super("RUNVERTICAL", agent);
+  }
+  
+   void onEnterState(){
+        println(name);
+      }
+  
+  void onDrawState(){
+      if (!agent.agentInput.isRunning()) {
+          agent.changeState("IDLE");
+          return;
+      }
+  
+      float newPositionY = agent.positionY + agent.speed * agent.agentInput.getDirection();
+
+      if (agent.agentInput.getDirection() == 1 && newPositionY > screenWidth - agent.sizeY - 50) {
+          agent.positionY = screenWidth - agent.sizeY - 50;
+      }
+      else if (agent.agentInput.getDirection() == -1 && newPositionY < 50) {
+          agent.positionY = 50;
+      }
+      else {
+          agent.positionY = newPositionY;
+      }
+  }
+
+   void onExitState(){}
+}
+
 class Die extends State{
   
   public Die(Agent agent){
