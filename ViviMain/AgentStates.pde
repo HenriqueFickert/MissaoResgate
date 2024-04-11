@@ -68,7 +68,7 @@ class RunVertical extends Run{
       }
   
       if (agent.positionY > screenHeight + agent.sizeY) {
-          agent.changeState("OUTOFFSCREEN");
+          agent.changeState("DISABLE");
           return;
       }
   
@@ -94,10 +94,10 @@ class Die extends State{
    void onExitState(){}
 }
 
-class OutOffScreen extends State{
+class Disable extends State{
   
-  public OutOffScreen(Agent agent){
-    super("OUTOFFSCREEN", agent);
+  public Disable(Agent agent){
+    super("DISABLE", agent);
   }
   
    void onEnterState(){
