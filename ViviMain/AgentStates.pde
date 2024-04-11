@@ -13,7 +13,6 @@ class Idle extends State{
         agent.changeState("RUN");
         return;
       }
-        
    }
   
    void onExitState(){}
@@ -29,7 +28,7 @@ class Run extends State{
         println(name);
       }
   
-  void onDrawState(){
+   void onDrawState(){
       if (!agent.agentInput.isRunning()) {
           agent.changeState("IDLE");
           return;
@@ -69,16 +68,11 @@ class RunVertical extends Run{
       }
   
       if (agent.positionY > screenHeight + agent.sizeY) {
-          agent.changeState("OFFSCREEN");
+          agent.changeState("OUTOFFSCREEN");
           return;
       }
   
       float newPositionY = agent.positionY + agent.speed * agent.agentInput.getDirection();
-      
-      if (newPositionY > screenHeight + agent.sizeY) {
-          
-      }
-      
       agent.positionY = newPositionY;
   }
 
@@ -103,7 +97,7 @@ class Die extends State{
 class OutOffScreen extends State{
   
   public OutOffScreen(Agent agent){
-    super("OFFSCREEN", agent);
+    super("OUTOFFSCREEN", agent);
   }
   
    void onEnterState(){

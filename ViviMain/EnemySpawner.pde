@@ -39,7 +39,7 @@ class EnemySpawner {
     if (columnIndex < 0 || columnIndex >= spotsX.length) return;
         
         for (Enemy enemy : enemies) {
-          if (enemy.currentStateName == "OFFSCREEN") {
+          if (enemy.currentStateName == "OUTOFFSCREEN") {
             enemy.setPosition(spotsX[columnIndex], -100);
             enemy.changeState("RUN");
             return;
