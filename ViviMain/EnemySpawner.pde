@@ -5,6 +5,7 @@ class EnemySpawner {
   EnemySpawner() {
     enemies = new ArrayList<Enemy>();
     initializeSpots();
+    spawnEnemy(1);
   }
 
   void initializeSpots() {
@@ -16,8 +17,6 @@ class EnemySpawner {
       int centerX = margin + (i * columnWidth) + (columnWidth / 2);
       spotsX[i] = centerX;
     }
-    
-    spawnEnemy(1);
   }
   
   void onDraw(){

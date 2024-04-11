@@ -1,10 +1,10 @@
 class Game extends Scene {
+  Player player = new Player(300, 700);
+  EnemySpawner enemySpawner = new EnemySpawner();
+  
   Game(int sceneId) {
     super(sceneId);
   }
-  
-  Player player = new Player(300, 700);
-  EnemySpawner enemySpawner = new EnemySpawner();
   
   void onClick(){}
     
