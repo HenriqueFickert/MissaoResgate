@@ -68,6 +68,11 @@ class RunVertical extends Run{
           return;
       }
   
+      if (agent.positionY > screenHeight + agent.sizeY) {
+          agent.changeState("OFFSCREEN");
+          return;
+      }
+  
       float newPositionY = agent.positionY + agent.speed * agent.agentInput.getDirection();
       
       if (newPositionY > screenHeight + agent.sizeY) {
@@ -84,6 +89,21 @@ class Die extends State{
   
   public Die(Agent agent){
     super("DIE", agent);
+  }
+  
+   void onEnterState(){
+     println(name);
+   }
+  
+   void onDrawState(){}
+  
+   void onExitState(){}
+}
+
+class OutOffScreen extends State{
+  
+  public OutOffScreen(Agent agent){
+    super("OFFSCREEN", agent);
   }
   
    void onEnterState(){

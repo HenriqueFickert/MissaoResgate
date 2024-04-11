@@ -14,6 +14,7 @@ class Enemy extends Agent {
     initialState = "RUN";
     states = new ArrayList<State>();
     states.add(new Idle(this));
+    states.add(new OutOffScreen(this));
     states.add(new RunVertical(this));
     states.add(new Die(this));
     initializeAgent();

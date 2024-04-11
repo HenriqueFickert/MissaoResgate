@@ -28,6 +28,7 @@ class Game extends Scene {
   void detectCollisions(){
     for (WorldObject object : enemySpawner.enemies) {
       if (object.tag == "Enemy" && player.detectCollision(object)) {
+        println("collidiu " + object.tag);
       }
     }
   }

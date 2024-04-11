@@ -3,6 +3,7 @@ class Agent extends WorldObject {
   State currentState;
   State previousState;
   String initialState;
+  public String currentStateName;
    
   float speed = 10;
   
@@ -45,6 +46,7 @@ class Agent extends WorldObject {
     
     previousState = currentState;
     currentState = desiredState;
+    currentStateName = currentState.name;
     currentState.onEnterState();
   }
   

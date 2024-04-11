@@ -19,6 +19,11 @@ public abstract class WorldObject {
     return overlapX && overlapY;
   }
   
+  public void setPosition(float x, float y) {
+    this.positionX = x;
+    this.positionY = y;
+  }
+  
   public void loadImageArchive (String path){
     sprite = loadImage(path);
   }

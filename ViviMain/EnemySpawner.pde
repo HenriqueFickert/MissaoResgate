@@ -22,7 +22,11 @@ class EnemySpawner {
   
   void onDraw() {
     if (millis() - lastSpawnTime > 1000) {
-      spawnEnemy((int) random(3));
+      if (random(1) < 0.5) {
+        spawnTwoEnemies();
+      } else {
+        poolingEnemies((int) random(3));
+      }
       lastSpawnTime = millis();
     }
     
@@ -31,10 +35,29 @@ class EnemySpawner {
     }
   }
   
-  void spawnEnemy(int columnIndex) {
+  void poolingEnemies(int columnIndex) {
     if (columnIndex < 0 || columnIndex >= spotsX.length) return;
+        
+        for (Enemy enemy : enemies) {
+          if (enemy.currentStateName == "OFFSCREEN") {
+            enemy.setPosition(spotsX[columnIndex], -100);
+            enemy.changeState("RUN");
+            return;
+          }
+        }
+        
+      Enemy newEnemy = new Enemy(spotsX[columnIndex], -100);
+      enemies.add(newEnemy);
+  }
+
+  void spawnTwoEnemies() {
+    int firstColumn = (int) random(3);
+    int secondColumn = (int) random(3);
+    while (secondColumn == firstColumn) {
+      secondColumn = (int) random(3);
+    }
     
-    Enemy newEnemy = new Enemy(spotsX[columnIndex], 20);
-    enemies.add(newEnemy);
+    poolingEnemies(firstColumn);
+    poolingEnemies(secondColumn);
   }
 }
