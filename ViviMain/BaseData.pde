@@ -1,7 +1,7 @@
 public abstract class WorldObject {
   public float positionX, positionY;
   int sizeX = 100, sizeY = 100;
-  String tag = "";
+  public String tag = "";
   PImage sprite;
  
   public WorldObject(float startX, float startY) {

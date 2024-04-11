@@ -4,6 +4,7 @@ class Player extends Agent {
   {
     super(startX, startY, new PlayerInput());
     loadImageArchive("sprites/player.png");
+    tag = "Player";
     sizeX = 80;
     sizeY = 30;
     initializePlayer();

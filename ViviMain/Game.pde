@@ -4,7 +4,7 @@ class Game extends Scene {
   }
   
   Player player = new Player(300, 700);
-  Enemy enemy = new Enemy(300, 100);
+  EnemySpawner enemySpawner = new EnemySpawner();
   
   void onClick(){}
     
@@ -19,9 +19,20 @@ class Game extends Scene {
   }
     
   void onDraw(){
-    background(235);
+    drawBackGround();
     player.onDraw();
-    enemy.onDraw();
-    enemy.agentInput.processInput(keys);
+    enemySpawner.onDraw();
+    detectCollisions();
+  }
+  
+  void detectCollisions(){
+    for (WorldObject object : enemySpawner.enemies) {
+      if (object.tag == "Enemy" && player.detectCollision(object)) {
+      }
+    }
+  }
+  
+  void drawBackGround(){
+      background(235);
   }
 }

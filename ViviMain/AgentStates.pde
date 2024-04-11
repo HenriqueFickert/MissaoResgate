@@ -51,16 +51,17 @@ class Run extends State{
    void onExitState(){}
 }
 
-class RunVertical extends State{
+class RunVertical extends Run{
   
   RunVertical(Agent agent){
-    super("RUNVERTICAL", agent);
+    super(agent);
   }
   
    void onEnterState(){
         println(name);
       }
   
+  @Override
   void onDrawState(){
       if (!agent.agentInput.isRunning()) {
           agent.changeState("IDLE");
@@ -68,16 +69,12 @@ class RunVertical extends State{
       }
   
       float newPositionY = agent.positionY + agent.speed * agent.agentInput.getDirection();
-
-      if (agent.agentInput.getDirection() == 1 && newPositionY > screenWidth - agent.sizeY - 50) {
-          agent.positionY = screenWidth - agent.sizeY - 50;
+      
+      if (newPositionY > screenHeight + agent.sizeY) {
+          
       }
-      else if (agent.agentInput.getDirection() == -1 && newPositionY < 50) {
-          agent.positionY = 50;
-      }
-      else {
-          agent.positionY = newPositionY;
-      }
+      
+      agent.positionY = newPositionY;
   }
 
    void onExitState(){}

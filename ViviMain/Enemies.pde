@@ -4,13 +4,14 @@ class Enemy extends Agent {
   {
     super(startX, startY, new EnemyInput());
     loadImageArchive("sprites/player.png");
+    tag = "Enemy";
     sizeX = 80;
     sizeY = 30;
     initializeEnemy();
   }
 
   private void initializeEnemy(){
-    initialState = "RUNVERTICAL";
+    initialState = "RUN";
     states = new ArrayList<State>();
     states.add(new Idle(this));
     states.add(new RunVertical(this));
