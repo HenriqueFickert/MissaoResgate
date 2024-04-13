@@ -1,12 +1,14 @@
 class Player extends Agent {
   
+  public int points;
+  
   Player(float startX, float startY)
   {
     super(startX, startY, new PlayerInput());
     loadImageArchive("sprites/player.png");
     tag = "Player";
-    sizeX = 80;
-    sizeY = 30;
+    sizeX = 64;
+    sizeY = 151;
     initializePlayer();
   }
 

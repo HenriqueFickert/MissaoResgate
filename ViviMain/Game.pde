@@ -1,5 +1,5 @@
 class Game extends Scene {
-  Player player = new Player(300, 700);
+  Player player = new Player(300, 580);
   EnemySpawner enemySpawner = new EnemySpawner();
   
   Game(int sceneId) {
@@ -25,12 +25,19 @@ class Game extends Scene {
     detectCollisions();
   }
   
-  void detectCollisions(){
-    for (WorldObject object : enemySpawner.enemies) {
-      if (object.tag == "Enemy" && player.detectCollision(object)) {
-        println("collidiu " + object.tag);
+  private long lastCheck = 0;
+  private final long delay = 100000;
+  
+  void detectCollisions() {
+      long now = System.nanoTime();
+      if ((now - lastCheck) >= delay) {
+          for (WorldObject object : enemySpawner.enemies) {
+              if (object.tag.equals("Enemy") && player.detectCollision(object)) {
+                  System.out.println("collidiu " + object.tag);
+              }
+          }
+          lastCheck = now; 
       }
-    }
   }
   
   void drawBackGround(){

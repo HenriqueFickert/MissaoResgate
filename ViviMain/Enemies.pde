@@ -5,8 +5,8 @@ class Enemy extends Agent {
     super(startX, startY, new EnemyInput());
     loadImageArchive("sprites/player.png");
     tag = "Enemy";
-    sizeX = 80;
-    sizeY = 30;
+    sizeX = 64;
+    sizeY = 151;
     initializeEnemy();
   }
 

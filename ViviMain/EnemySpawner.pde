@@ -1,6 +1,6 @@
 class EnemySpawner {
   public ArrayList<Enemy> enemies;
-  int[] spotsX = new int[3];
+  int[] spotsX = new int[4];
   int lastSpawnTime;
 
   EnemySpawner() {
@@ -12,10 +12,10 @@ class EnemySpawner {
   void initializeSpots() {
     int margin = 50;
     int usableWidth = width - (2 * margin);
-    int columnWidth = usableWidth / 3;
+    int columnWidth = usableWidth / spotsX.length;
     
-    for (int i = 0; i < 3; i++) {
-      int centerX = margin + (i * columnWidth) + (columnWidth / 2);
+    for (int i = 0; i < 4; i++) {
+      int centerX = margin + (i * columnWidth) + (columnWidth / spotsX.length);
       spotsX[i] = centerX;
     }
   }
@@ -25,7 +25,7 @@ class EnemySpawner {
       if (random(1) < 0.5) {
         spawnTwoEnemies();
       } else {
-        poolingEnemies((int) random(3));
+        poolingEnemies((int) random(spotsX.length));
       }
       lastSpawnTime = millis();
     }
@@ -51,10 +51,10 @@ class EnemySpawner {
   }
 
   void spawnTwoEnemies() {
-    int firstColumn = (int) random(3);
-    int secondColumn = (int) random(3);
+    int firstColumn = (int) random(spotsX.length);
+    int secondColumn = (int) random(spotsX.length);
     while (secondColumn == firstColumn) {
-      secondColumn = (int) random(3);
+      secondColumn = (int) random(spotsX.length);
     }
     
     poolingEnemies(firstColumn);
