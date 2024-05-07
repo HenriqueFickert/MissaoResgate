@@ -2,7 +2,7 @@ import processing.sound.*;
 import controlP5.*;
 
 Scene[] scenes;
-int currentScreen = 1;
+int currentScreen = 0;
 
 final int LEFT_ARROW = 0;
 final int RIGHT_ARROW = 1;

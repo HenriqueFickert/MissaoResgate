@@ -31,12 +31,14 @@ public abstract class WorldObject {
 
 public abstract class UIObject {
   float positionX, positionY;
-  float sizeX = 100, sizeY = 100;
+  int sizeX = 100, sizeY = 100;
   PImage sprite;
  
-  public UIObject(float startX, float startY) {
+  public UIObject(float startX, float startY, int sizeX, int sizeY) {
     positionX = startX;
     positionY = startY;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
   }
   
   protected abstract void onClick();
@@ -49,6 +51,10 @@ public abstract class UIObject {
   
   public void loadImageArchive (String path){
     sprite = loadImage(path);
+  }
+  
+  public void render(){
+      image(sprite.get(0,0,sizeX,sizeY), positionX, positionY);
   }
 }
 
