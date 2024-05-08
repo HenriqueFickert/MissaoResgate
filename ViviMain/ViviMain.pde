@@ -10,9 +10,13 @@ boolean [] keys = new boolean[2];
 
 final int screenHeight = 800, screenWidth = 600;
 
+ControlP5 cp5;
+String filePath = "hiscores.csv";
+
 void setup () {
    frameRate(60);
    size(600, 800);
+   cp5 = new ControlP5(this);
    scenes = new Scene[]{new Menu(0), new Game(1)};
 }
 
