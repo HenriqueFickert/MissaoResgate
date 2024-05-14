@@ -1,5 +1,5 @@
 class Enemy extends Agent {
-  
+
   Enemy(float startX, float startY)
   {
     super(startX, startY, new EnemyInput());
@@ -10,7 +10,7 @@ class Enemy extends Agent {
     initializeEnemy();
   }
 
-  private void initializeEnemy(){
+  private void initializeEnemy() {
     initialState = "RUN";
     states = new ArrayList<State>();
     states.add(new Idle(this));
@@ -21,19 +21,19 @@ class Enemy extends Agent {
   }
 }
 
-class EnemyInput  implements IAgentInput{
- 
-    private boolean isRunning = true;
-    private int direction = 1;
-  
-    public void processInput(boolean[] keys) {
-    }
-    
-    public int getDirection() {
-      return direction;
-    }
-    
-    public boolean isRunning() {
-      return isRunning;
-    }
+class EnemyInput  implements IAgentInput {
+
+  private boolean isRunning = true;
+  private int direction = 1;
+
+  public void processInput(boolean[] keys) {
+  }
+
+  public int getDirection() {
+    return direction;
+  }
+
+  public boolean isRunning() {
+    return isRunning;
+  }
 }

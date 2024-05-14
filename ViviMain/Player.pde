@@ -1,7 +1,7 @@
 class Player extends Agent {
-  
+
   public int points;
-  
+
   Player(float startX, float startY)
   {
     super(startX, startY, new PlayerInput());
@@ -12,7 +12,7 @@ class Player extends Agent {
     initializePlayer();
   }
 
-  private void initializePlayer(){
+  private void initializePlayer() {
     initialState = "IDLE";
     states = new ArrayList<State>();
     states.add(new Idle(this));
@@ -22,28 +22,28 @@ class Player extends Agent {
   }
 }
 
-class PlayerInput  implements IAgentInput{
- 
-    private boolean isRunning = false;
-    private int direction = 0;
-  
-    public void processInput(boolean[] keys) {
-      if (keys[RIGHT_ARROW]){
-        direction = 1;
-      } else if (keys[LEFT_ARROW]) {
-        direction = -1;
-      } else {
-        direction = 0;
-      }
-      
-      isRunning = keys[RIGHT_ARROW] || keys[LEFT_ARROW];
+class PlayerInput  implements IAgentInput {
+
+  private boolean isRunning = false;
+  private int direction = 0;
+
+  public void processInput(boolean[] keys) {
+    if (keys[RIGHT_ARROW]) {
+      direction = 1;
+    } else if (keys[LEFT_ARROW]) {
+      direction = -1;
+    } else {
+      direction = 0;
     }
-    
-    public int getDirection() {
-      return direction;
-    }
-    
-    public boolean isRunning() {
-      return isRunning;
-    }
+
+    isRunning = keys[RIGHT_ARROW] || keys[LEFT_ARROW];
+  }
+
+  public int getDirection() {
+    return direction;
+  }
+
+  public boolean isRunning() {
+    return isRunning;
+  }
 }
