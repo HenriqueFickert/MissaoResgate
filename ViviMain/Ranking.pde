@@ -26,7 +26,7 @@ class Ranking {
     txtUsername = cp5.addTextfield("Nickname")
       .setPosition(positionX, positionY)
       .setSize(100, 30)
-      .setVisible (true);
+      .setVisible(false);
   }
 
   public void setUsernameVisible(boolean isVisible) {
@@ -34,18 +34,30 @@ class Ranking {
     txtUsername.setFocus(isVisible);
   }
 
-  public void createRankingTable(float positionY, float positionX, float rowGap, float colummGap) {
+  public void createRankingTable(float positionX, float positionY, float rowGap, float colummGap) {
     table = loadTable(filePath, "header");
     fill(0);
+    textAlign(LEFT);
+    int rank = 1;
     for (TableRow row : table.rows()) {
-      text(row.getString("player"), positionX, positionY);
-      text(row.getString("points"), positionX + colummGap, positionY);
+      text(rank + ".", positionX, positionY);
+      text(row.getString("player"), positionX + 30, positionY);
+      text(row.getString("points" )+ "pts", positionX + colummGap, positionY);
       positionY += rowGap;
+      rank++;
     }
+  }
+
+  public String getPlayerName() {
+    return player;
   }
 
   public void setPlayerName() {
     this.player = txtUsername.getText();
+  }
+
+  public String getInputText() {
+    return txtUsername.getText();
   }
 
   public void setPoints(int points) {

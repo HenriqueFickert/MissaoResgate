@@ -2,18 +2,21 @@ class Button extends UIObject {
 
   PFont boldFont;
   boolean useText = true;
+  String text = "";
 
-  Button(float startX, float startY, ClickAction action) {
+  Button(float startX, float startY, String text, ClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive("sprites/playbutton.png");
     boldFont = createFont("Arial-Bold", 16);
+    this.text = text;
   }
 
-  Button(String imagepath, boolean useText, float startX, float startY, ClickAction action) {
+  Button(String imagepath, boolean useText, float startX, float startY, String text, ClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive(imagepath);
     boldFont = createFont("Arial-Bold", 16);
     this.useText = useText;
+    this.text = text;
   }
 
   public void render() {
@@ -26,7 +29,7 @@ class Button extends UIObject {
       textSize(16);
       float textX = positionX + sizeX / 2;
       float textY = positionY + sizeY / 2;
-      text("PLAY", textX, textY);
+      text(text, textX, textY);
     }
   }
 }
