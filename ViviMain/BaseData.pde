@@ -29,19 +29,29 @@ public abstract class WorldObject {
   }
 }
 
+interface ClickAction {
+    void execute();
+}
+
 public abstract class UIObject {
-  float positionX, positionY;
-  int sizeX = 100, sizeY = 100;
-  PImage sprite;
+    float positionX, positionY;
+    int sizeX = 100, sizeY = 100;
+    PImage sprite;
+    ClickAction clickAction;
 
-  public UIObject(float startX, float startY, int sizeX, int sizeY) {
-    positionX = startX;
-    positionY = startY;
-    this.sizeX = sizeX;
-    this.sizeY = sizeY;
-  }
+    public UIObject(float startX, float startY, int sizeX, int sizeY, ClickAction action) {
+        positionX = startX;
+        positionY = startY;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.clickAction = action;
+    }
 
-  protected abstract void onClick();
+    public void onClick() {
+        if (clickAction != null) {
+            clickAction.execute();
+        }
+    }
 
   public boolean detectMouseCollision() {
     boolean overlapX = mouseX >= positionX && mouseX <= positionX + sizeX;

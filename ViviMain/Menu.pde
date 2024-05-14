@@ -1,22 +1,27 @@
 class Menu extends Scene {
-  StartButton startbutton;
+  Button startButton;
   Ranking ranking;
-  
+
   boolean askName = true;
 
   Menu(int sceneId) {
     super(sceneId);
-    startbutton = new StartButton(getMiddleScreenX(150), getMiddleScreenY(50));
-    ranking = new Ranking();
+
+    startButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), () -> {
+      currentScreen = 1;
+    }
+    );
     
+    ranking = new Ranking();
+
     if (askName)
       ranking.createUsernameInput(getMiddleScreenX(100), getMiddleScreenY(30));
   }
 
   void onClick()
   {
-    if (startbutton.detectMouseCollision())
-      startbutton.onClick();
+    if (startButton.detectMouseCollision())
+      startButton.onClick();
   }
 
   void onKeyPressed(boolean [] keys) {
@@ -26,7 +31,7 @@ class Menu extends Scene {
   }
 
   void onDraw() {
-    startbutton.render();
+    startButton.render();
   }
 
   public float getMiddleScreenX(int size) {

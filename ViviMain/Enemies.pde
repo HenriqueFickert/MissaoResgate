@@ -21,7 +21,7 @@ class Enemy extends Agent {
   }
 }
 
-class EnemyInput  implements IAgentInput {
+class EnemyInput implements IAgentInput {
 
   private boolean isRunning = true;
   private int direction = 1;
