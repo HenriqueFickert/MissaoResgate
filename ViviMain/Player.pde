@@ -35,6 +35,8 @@ class Player extends Agent {
         println ("lives:" + lives);
         if (lives <= 0) {
           changeState("DIE");
+          ranking.setPoints(match.points);
+          ranking.savePoints();
         }
       } else if (otherAgent.tag.equals("Ally"))
       {

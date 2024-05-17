@@ -7,7 +7,6 @@ enum MenuState {
 class Menu extends Scene {
 
   MenuState currentState = MenuState.GETPLAYERDATA;
-  Ranking ranking;
 
   Button startButton;
   Button rankingButton;
@@ -17,7 +16,6 @@ class Menu extends Scene {
 
   Menu(int sceneId) {
     super(sceneId);
-    ranking = new Ranking();
     createGetPlayerDataMenu();
     createMainMenu();
   }
