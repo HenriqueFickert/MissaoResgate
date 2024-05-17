@@ -1,9 +1,15 @@
 class Game extends Scene {
-  Player player = new Player(300, 580);
+  private int points = 0;
+  private int interval = 3000;
+  private int previousMillis = 0;
+  PImage healthSprite;
+
+  Player player = new Player(300, 580, this);
   EnemySpawner enemySpawner = new EnemySpawner();
 
   Game(int sceneId) {
     super(sceneId);
+    healthSprite = loadImage("sprites/heart.png");
   }
 
   void onClick() {
@@ -24,6 +30,40 @@ class Game extends Scene {
     player.onDraw();
     enemySpawner.onDraw();
     detectCollisions();
+    pointsTimer();
+    renderPointsUI();
+    renderLivesUI();
+  }
+
+  private void renderPointsUI() {
+    fill(000000);
+    textSize(25);
+    text(points, (width - 50) / 2, 25);
+  }
+
+  private void renderLivesUI() {
+    int heartSizeX = 32;
+    int heartSizeY = 29;
+    int spacing = 10;
+    int startX = 10;
+    int startY = 10;
+
+    for (int i = 0; i < player.getPlayerLives(); i++) {
+      image(healthSprite, startX + i * (heartSizeX + spacing), startY, heartSizeX, heartSizeY);
+    }
+  }
+
+  private void pointsTimer() {
+    int currentMillis = millis();
+
+    if (currentMillis - previousMillis >= interval) {
+      previousMillis = currentMillis;
+      updatePoints(5);
+    }
+  }
+
+  public void updatePoints(int points) {
+    this.points += points;
   }
 
   private long lastCheck = 0;
@@ -31,10 +71,14 @@ class Game extends Scene {
 
   void detectCollisions() {
     long now = System.nanoTime();
+
     if ((now - lastCheck) >= delay) {
       for (WorldObject object : enemySpawner.enemies) {
-        if (object.tag.equals("Enemy") && player.detectCollision(object)) {
-          System.out.println("collidiu " + object.tag);
+        if (player.detectCollision(object)) {
+          player.onGetHit((IHittable) object);
+        }
+        if (object.detectCollision(player)) {
+          ((Agent) object).onGetHit(player);
         }
       }
       lastCheck = now;

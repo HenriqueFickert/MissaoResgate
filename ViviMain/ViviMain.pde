@@ -38,3 +38,11 @@ void keyReleased() {
   if (keyCode == RIGHT) keys[RIGHT_ARROW] = false;
   scenes[currentScreen].onKeyReleased(keys);
 }
+
+public float getMiddleScreenX(int size) {
+  return (width - size) / 2;
+}
+
+public float getMiddleScreenY(int size) {
+  return (height - size) / 2;
+}

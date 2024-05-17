@@ -1,29 +1,54 @@
 class Player extends Agent {
 
-  public int points;
+  private int lives = 3;
+  private Game match;
 
-  Player(float startX, float startY)
+  Player(float startX, float startY, Game match)
   {
     super(startX, startY, new PlayerInput());
     loadImageArchive("sprites/player.png");
     tag = "Player";
     sizeX = 64;
     sizeY = 151;
-    initializePlayer();
+    this.match = match;
+    initializeAgent();
   }
 
-  private void initializePlayer() {
+  @Override
+    public void initializeAgent() {
+    interactable = true;
     initialState = "IDLE";
     states = new ArrayList<State>();
     states.add(new Idle(this));
     states.add(new Run(this));
     states.add(new Die(this));
-    initializeAgent();
+    setUpSprites();
+    changeState(initialState);
+  }
+
+  @Override
+    public void onGetHit(IHittable other) {
+    if (other instanceof Agent) {
+      Agent otherAgent = (Agent) other;
+      if (otherAgent.tag.equals("Enemy")) {
+        lives--;
+        println ("lives:" + lives);
+        if (lives <= 0) {
+          changeState("DIE");
+        }
+      } else if (otherAgent.tag.equals("Ally"))
+      {
+        match.updatePoints(20);
+      }
+    }
+  }
+
+  public int getPlayerLives() {
+    return lives;
   }
 }
 
 class PlayerInput  implements IAgentInput {
-
   private boolean isRunning = false;
   private int direction = 0;
 

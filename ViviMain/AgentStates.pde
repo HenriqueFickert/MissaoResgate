@@ -1,3 +1,4 @@
+//IDLE
 class Idle extends State {
 
   public Idle(Agent agent) {
@@ -19,6 +20,7 @@ class Idle extends State {
   }
 }
 
+//HORIZONTAL RUN
 class Run extends State {
 
   public Run(Agent agent) {
@@ -50,6 +52,7 @@ class Run extends State {
   }
 }
 
+//VERTICAL RUN
 class RunVertical extends Run {
 
   RunVertical(Agent agent) {
@@ -67,7 +70,7 @@ class RunVertical extends Run {
       return;
     }
 
-    if (agent.positionY > screenHeight + agent.sizeY) {
+    if (agent.positionY > screenHeight + agent.sizeY || !agent.interactable) {
       agent.changeState("DISABLE");
       return;
     }
@@ -80,6 +83,7 @@ class RunVertical extends Run {
   }
 }
 
+//DIE
 class Die extends State {
 
   public Die(Agent agent) {
@@ -97,6 +101,7 @@ class Die extends State {
   }
 }
 
+//DISABLE
 class Disable extends State {
 
   public Disable(Agent agent) {
@@ -104,6 +109,8 @@ class Disable extends State {
   }
 
   void onEnterState() {
+    agent.setPosition(width/2, -300);
+    agent.interactable = false;
     println(name);
   }
 

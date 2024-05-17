@@ -3,6 +3,7 @@ public abstract class WorldObject {
   int sizeX = 100, sizeY = 100;
   public String tag = "";
   PImage sprite;
+  public boolean interactable = true;
 
   public WorldObject(float startX, float startY) {
     positionX = startX;
@@ -29,17 +30,13 @@ public abstract class WorldObject {
   }
 }
 
-interface ClickAction {
-    void execute();
-}
-
 public abstract class UIObject {
     float positionX, positionY;
     int sizeX = 100, sizeY = 100;
     PImage sprite;
-    ClickAction clickAction;
+    IClickAction clickAction;
 
-    public UIObject(float startX, float startY, int sizeX, int sizeY, ClickAction action) {
+    public UIObject(float startX, float startY, int sizeX, int sizeY, IClickAction action) {
         positionX = startX;
         positionY = startY;
         this.sizeX = sizeX;
@@ -98,10 +95,4 @@ public abstract class State {
   public abstract void onDrawState();
 
   public abstract void onExitState();
-}
-
-interface IAgentInput {
-  public void processInput(boolean[] keys);
-  public int getDirection();
-  public boolean isRunning();
 }

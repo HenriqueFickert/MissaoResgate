@@ -39,14 +39,16 @@ class EnemySpawner {
     if (columnIndex < 0 || columnIndex >= spotsX.length) return;
 
     for (Enemy enemy : enemies) {
-      if (enemy.currentStateName == "OUTOFFSCREEN") {
+      if (enemy.currentStateName == "DISABLE") {
         enemy.setPosition(spotsX[columnIndex], -100);
-        enemy.changeState("RUN");
+        enemy.initializeAgent();
         return;
       }
     }
 
     Enemy newEnemy = new Enemy(spotsX[columnIndex], -100);
+    println("New Enemy created");
+    println(enemies.size());
     enemies.add(newEnemy);
   }
 

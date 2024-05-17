@@ -1,17 +1,16 @@
 class Button extends UIObject {
-
   PFont boldFont;
   boolean useText = true;
   String text = "";
 
-  Button(float startX, float startY, String text, ClickAction action) {
+  Button(float startX, float startY, String text, IClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive("sprites/playbutton.png");
     boldFont = createFont("Arial-Bold", 16);
     this.text = text;
   }
 
-  Button(String imagepath, boolean useText, float startX, float startY, String text, ClickAction action) {
+  Button(String imagepath, boolean useText, float startX, float startY, String text, IClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive(imagepath);
     boldFont = createFont("Arial-Bold", 16);

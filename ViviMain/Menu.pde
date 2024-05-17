@@ -124,12 +124,4 @@ class Menu extends Scene {
       break;
     }
   }
-
-  public float getMiddleScreenX(int size) {
-    return (width - size) / 2;
-  }
-
-  public float getMiddleScreenY(int size) {
-    return (height - size) / 2;
-  }
 }

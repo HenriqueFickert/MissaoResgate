@@ -7,17 +7,31 @@ class Enemy extends Agent {
     tag = "Enemy";
     sizeX = 64;
     sizeY = 151;
-    initializeEnemy();
+    initializeAgent();
   }
 
-  private void initializeEnemy() {
+  @Override
+    public void initializeAgent() {
+    interactable = true;
     initialState = "RUN";
     states = new ArrayList<State>();
     states.add(new Idle(this));
     states.add(new RunVertical(this));
-    states.add(new Die(this));
     states.add(new Disable(this));
-    initializeAgent();
+    setUpSprites();
+    changeState(initialState);
+  }
+
+  @Override
+    public void onGetHit(IHittable other) {
+    if (other instanceof Agent) {
+      Agent otherAgent = (Agent) other;
+      if (otherAgent.tag.equals("Player"))
+      {
+        changeState("DISABLE");
+        interactable = false;
+      }
+    }
   }
 }
 

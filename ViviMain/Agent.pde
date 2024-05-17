@@ -1,4 +1,4 @@
-class Agent extends WorldObject {
+class Agent extends WorldObject implements IHittable {
   ArrayList<State> states;
   State currentState;
   State previousState;
@@ -6,7 +6,6 @@ class Agent extends WorldObject {
   public String currentStateName;
 
   float speed = 10;
-
   IAgentInput agentInput;
 
   PImage[] [] sprites;
@@ -17,7 +16,7 @@ class Agent extends WorldObject {
     this.agentInput = agentInput;
   }
 
-  protected void initializeAgent()
+  public void initializeAgent()
   {
     setUpSprites();
     changeState(initialState);
@@ -58,6 +57,8 @@ class Agent extends WorldObject {
     }
     return null;
   }
+
+  public void onGetHit(IHittable other){}
 
   protected void setUpSprites()
   {
