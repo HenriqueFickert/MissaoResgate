@@ -1,9 +1,47 @@
-class Enemy extends Agent {
+class House extends Agent {
 
-  Enemy(float startX, float startY)
+  House(float startX, float startY)
   {
     super(startX, startY, new EnemyInput());
     loadImageArchive("sprites/player.png");
+    tag = "Enemy";
+    sizeX = 64;
+    sizeY = 151;
+    initializeAgent();
+    speed = 8;
+  }
+
+  @Override
+    public void initializeAgent() {
+    interactable = true;
+    initialState = "RUN";
+    states = new ArrayList<State>();
+    states.add(new Idle(this));
+    states.add(new RunVertical(this));
+    states.add(new Disable(this));
+    setUpSprites();
+    changeState(initialState);
+  }
+
+  @Override
+    public void onGetHit(IHittable other) {
+    if (other instanceof Agent) {
+      Agent otherAgent = (Agent) other;
+      if (otherAgent.tag.equals("Player"))
+      {
+        changeState("DISABLE");
+        interactable = false;
+      }
+    }
+  }
+}
+
+class Tree extends Agent {
+
+  Tree(float startX, float startY)
+  {
+    super(startX, startY, new EnemyInput());
+    loadImageArchive("sprites/playbutton.png");
     tag = "Enemy";
     sizeX = 64;
     sizeY = 151;

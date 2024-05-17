@@ -5,7 +5,7 @@ class Game extends Scene {
   PImage healthSprite;
 
   Player player = new Player(300, 580, this);
-  EnemySpawner enemySpawner = new EnemySpawner();
+  AgentSpawner agentSpawner = new AgentSpawner();
 
   Game(int sceneId) {
     super(sceneId);
@@ -28,7 +28,7 @@ class Game extends Scene {
   void onDraw() {
     drawBackGround();
     player.onDraw();
-    enemySpawner.onDraw();
+    agentSpawner.onDraw();
     detectCollisions();
     pointsTimer();
     renderPointsUI();
@@ -37,7 +37,7 @@ class Game extends Scene {
 
   private void renderPointsUI() {
     fill(000000);
-    textSize(25);
+    textFont(font, 25);
     text(points, (width - 50) / 2, 25);
   }
 
@@ -73,7 +73,7 @@ class Game extends Scene {
     long now = System.nanoTime();
 
     if ((now - lastCheck) >= delay) {
-      for (WorldObject object : enemySpawner.enemies) {
+      for (WorldObject object : agentSpawner.agents) {
         if (player.detectCollision(object)) {
           player.onGetHit((IHittable) object);
         }

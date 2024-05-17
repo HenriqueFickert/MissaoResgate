@@ -13,7 +13,6 @@ class Button extends UIObject {
   Button(String imagepath, boolean useText, float startX, float startY, String text, IClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive(imagepath);
-    boldFont = createFont("Arial-Bold", 16);
     this.useText = useText;
     this.text = text;
   }
@@ -22,7 +21,7 @@ class Button extends UIObject {
     image(sprite, positionX, positionY);
 
     if (useText) {
-      textFont(boldFont);
+      textFont(font, 16);
       textAlign(CENTER, CENTER);
       fill(0xFFFF7C28);
       textSize(16);

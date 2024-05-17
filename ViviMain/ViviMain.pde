@@ -13,12 +13,16 @@ final int screenHeight = 800, screenWidth = 600;
 ControlP5 cp5;
 public Ranking ranking;
 
+PFont font;
+
+
 void setup () {
   frameRate(60);
   size(600, 800);
   cp5 = new ControlP5(this);
   ranking = new Ranking();
   scenes = new Scene[]{new Menu(0), new Game(1)};
+  font = loadFont("ArialMT-15.vlw");
 }
 
 void draw() {
