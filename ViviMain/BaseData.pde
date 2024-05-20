@@ -31,24 +31,24 @@ public abstract class WorldObject {
 }
 
 public abstract class UIObject {
-    float positionX, positionY;
-    int sizeX = 100, sizeY = 100;
-    PImage sprite;
-    IClickAction clickAction;
+  float positionX, positionY;
+  int sizeX = 100, sizeY = 100;
+  PImage sprite;
+  IClickAction clickAction;
 
-    public UIObject(float startX, float startY, int sizeX, int sizeY, IClickAction action) {
-        positionX = startX;
-        positionY = startY;
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        this.clickAction = action;
-    }
+  public UIObject(float startX, float startY, int sizeX, int sizeY, IClickAction action) {
+    positionX = startX;
+    positionY = startY;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+    this.clickAction = action;
+  }
 
-    public void onClick() {
-        if (clickAction != null) {
-            clickAction.execute();
-        }
+  public void onClick() {
+    if (clickAction != null) {
+      clickAction.execute();
     }
+  }
 
   public boolean detectMouseCollision() {
     boolean overlapX = mouseX >= positionX && mouseX <= positionX + sizeX;
@@ -73,6 +73,8 @@ public abstract class Scene {
   }
 
   public abstract void onInitialized();
+  
+  public abstract void obtainPlayer(Player player);
 
   protected abstract void onClick();
 

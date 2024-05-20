@@ -12,6 +12,7 @@ class Menu extends Scene {
   Button rankingButton;
 
   Button returnButton;
+  PImage menuBg;
 
   Button confirmPlayerDataButton;
 
@@ -19,6 +20,7 @@ class Menu extends Scene {
 
   Menu(int sceneId) {
     super(sceneId);
+    menuBg = loadImage("sprites/bgmenu.png");
     createGetPlayerDataMenu();
     createMainMenu();
     createRankingMenu();
@@ -26,7 +28,9 @@ class Menu extends Scene {
 
   void onInitialized() {
     currentState = MenuState.GETPLAYERDATA;
-    createGetPlayerDataMenu();
+
+    ranking.txtUsername.setText("");
+    ranking.setUsernameVisible(true);
     createMainMenu();
     createRankingMenu();
   }
@@ -102,6 +106,7 @@ class Menu extends Scene {
   }
 
   private void renderRankingMenu() {
+    image(menuBg, getMiddleScreenX(400), getMiddleScreenY(600));
     textAlign(CENTER);
     textSize(25);
     text("Ranking", 300, 80);
@@ -148,4 +153,6 @@ class Menu extends Scene {
       break;
     }
   }
+  
+   void obtainPlayer (Player player){}
 }

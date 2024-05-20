@@ -1,5 +1,5 @@
 interface IClickAction {
-    void execute();
+  void execute();
 }
 
 interface IAgentInput {

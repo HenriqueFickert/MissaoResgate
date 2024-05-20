@@ -25,7 +25,7 @@ class Ranking {
   public void createUsernameInput(float positionX, float positionY) {
     txtUsername = cp5.addTextfield("")
       .setPosition(positionX, positionY)
-      .setFont(smallFont) 
+      .setFont(smallFont)
       .setSize(200, 40)
       .setVisible(false);
   }

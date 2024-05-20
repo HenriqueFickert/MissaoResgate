@@ -64,7 +64,7 @@ class AgentSpawner {
     } else {
       newAgent = new Cat(spotsX[columnIndex], -100);
     }
-    println("novo agent criado");
+
     agents.add(newAgent);
   }
 

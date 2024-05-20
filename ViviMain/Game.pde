@@ -44,7 +44,7 @@ class Game extends Scene {
     pointsTimer();
     renderPointsUI();
     renderLivesUI();
-    
+
     if (isFlashing) {
       flashScreen();
     }
@@ -91,7 +91,6 @@ class Game extends Scene {
       for (WorldObject object : agentSpawner.agents) {
         if (player.detectCollision(object)) {
           player.onGetHit((IHittable) object);
-          startFlashing();
         }
         if (object.detectCollision(player)) {
           ((Agent) object).onGetHit(player);
@@ -119,4 +118,6 @@ class Game extends Scene {
       isFlashing = false;
     }
   }
+  
+  void obtainPlayer (Player player){}
 }

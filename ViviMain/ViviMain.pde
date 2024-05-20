@@ -23,7 +23,7 @@ void setup () {
   smallFont = createFont("fonts/PoetsenOne-Regular.ttf", 14);
   cp5 = new ControlP5(this);
   ranking = new Ranking();
-  scenes = new Scene[]{new Menu(0), new Game(1)};
+  scenes = new Scene[]{new Menu(0), new Game(1), new FinalGame(2)};
 }
 
 void draw() {
@@ -46,10 +46,17 @@ void keyReleased() {
   scenes[currentScreen].onKeyReleased(keys);
 }
 
-public void changeScreen(int index){
+public void changeScreen(int index) {
   currentScreen = index;
   scenes[currentScreen].onInitialized();
 }
+
+public void changeScreenPlayer(int index, Player player) {
+  currentScreen = index;
+  scenes[currentScreen].obtainPlayer(player);
+  scenes[currentScreen].onInitialized();
+}
+
 
 public float getMiddleScreenX(int size) {
   return (width - size) / 2;

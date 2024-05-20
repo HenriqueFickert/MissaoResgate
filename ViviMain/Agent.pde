@@ -58,7 +58,8 @@ class Agent extends WorldObject implements IHittable {
     return null;
   }
 
-  public void onGetHit(IHittable other){}
+  public void onGetHit(IHittable other) {
+  }
 
   protected void setUpSprites()
   {

@@ -6,7 +6,6 @@ class Idle extends State {
   }
 
   void onEnterState() {
-    println(name);
   }
 
   void onDrawState() {
@@ -28,7 +27,6 @@ class Run extends State {
   }
 
   void onEnterState() {
-    println(name);
   }
 
   void onDrawState() {
@@ -60,7 +58,6 @@ class RunVertical extends Run {
   }
 
   void onEnterState() {
-    println(name);
   }
 
   @Override
@@ -91,7 +88,6 @@ class Die extends State {
   }
 
   void onEnterState() {
-    println(name);
   }
 
   void onDrawState() {
@@ -111,7 +107,6 @@ class Disable extends State {
   void onEnterState() {
     agent.setPosition(width/2, -300);
     agent.interactable = false;
-    println(name);
   }
 
   void onDrawState() {
