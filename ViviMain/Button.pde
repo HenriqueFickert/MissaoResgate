@@ -6,7 +6,7 @@ class Button extends UIObject {
   Button(float startX, float startY, String text, IClickAction action) {
     super(startX, startY, 150, 50, action);
     loadImageArchive("sprites/playbutton.png");
-    boldFont = createFont("Arial-Bold", 16);
+    textSize(16);
     this.text = text;
   }
 

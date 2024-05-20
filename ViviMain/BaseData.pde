@@ -72,6 +72,8 @@ public abstract class Scene {
     this.sceneId = sceneId;
   }
 
+  public abstract void onInitialized();
+
   protected abstract void onClick();
 
   protected abstract void onKeyPressed(boolean [] keys);

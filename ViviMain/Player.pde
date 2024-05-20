@@ -33,10 +33,12 @@ class Player extends Agent {
       if (otherAgent.tag.equals("Enemy")) {
         lives--;
         println ("lives:" + lives);
+        match.startFlashing();
         if (lives <= 0) {
           changeState("DIE");
           ranking.setPoints(match.points);
           ranking.savePoints();
+          changeScreen(0);
         }
       } else if (otherAgent.tag.equals("Ally"))
       {

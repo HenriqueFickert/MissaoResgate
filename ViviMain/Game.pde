@@ -4,24 +4,35 @@ class Game extends Scene {
   private int previousMillis = 0;
   PImage healthSprite;
 
-  Player player = new Player(300, 580, this);
-  AgentSpawner agentSpawner = new AgentSpawner();
+  Player player;
+  AgentSpawner agentSpawner;
+
+  private boolean isFlashing = false;
+  private int flashStartTime = 0;
+  private int flashDuration = 100;
 
   Game(int sceneId) {
     super(sceneId);
     healthSprite = loadImage("sprites/heart.png");
+    onInitialized();
+  }
+
+  void onInitialized() {
+    player = new Player(300, 580, this);
+    agentSpawner = new AgentSpawner();
+    points = 0;
+    previousMillis = millis();
+    lastCheck = 0;
   }
 
   void onClick() {
   }
 
-  void onKeyPressed(boolean [] keys)
-  {
+  void onKeyPressed(boolean [] keys) {
     player.agentInput.processInput(keys);
   }
 
-  void onKeyReleased(boolean [] keys)
-  {
+  void onKeyReleased(boolean [] keys) {
     player.agentInput.processInput(keys);
   }
 
@@ -33,10 +44,14 @@ class Game extends Scene {
     pointsTimer();
     renderPointsUI();
     renderLivesUI();
+    
+    if (isFlashing) {
+      flashScreen();
+    }
   }
 
   private void renderPointsUI() {
-    fill(000000);
+    fill(0);
     textFont(font, 25);
     text(points, (width - 50) / 2, 25);
   }
@@ -76,6 +91,7 @@ class Game extends Scene {
       for (WorldObject object : agentSpawner.agents) {
         if (player.detectCollision(object)) {
           player.onGetHit((IHittable) object);
+          startFlashing();
         }
         if (object.detectCollision(player)) {
           ((Agent) object).onGetHit(player);
@@ -87,5 +103,20 @@ class Game extends Scene {
 
   void drawBackGround() {
     background(235);
+  }
+
+  void startFlashing() {
+    isFlashing = true;
+    flashStartTime = millis();
+  }
+
+  void flashScreen() {
+    int currentMillis = millis();
+    if (currentMillis - flashStartTime < flashDuration) {
+      fill(255, 255, 255, 128);
+      rect(0, 0, width, height);
+    } else {
+      isFlashing = false;
+    }
   }
 }

@@ -14,15 +14,16 @@ ControlP5 cp5;
 public Ranking ranking;
 
 PFont font;
-
+PFont smallFont;
 
 void setup () {
   frameRate(60);
   size(600, 800);
+  font = createFont("fonts/PoetsenOne-Regular.ttf", 18);
+  smallFont = createFont("fonts/PoetsenOne-Regular.ttf", 14);
   cp5 = new ControlP5(this);
   ranking = new Ranking();
   scenes = new Scene[]{new Menu(0), new Game(1)};
-  font = loadFont("ArialMT-15.vlw");
 }
 
 void draw() {
@@ -43,6 +44,11 @@ void keyReleased() {
   if (keyCode == LEFT) keys[LEFT_ARROW] = false;
   if (keyCode == RIGHT) keys[RIGHT_ARROW] = false;
   scenes[currentScreen].onKeyReleased(keys);
+}
+
+public void changeScreen(int index){
+  currentScreen = index;
+  scenes[currentScreen].onInitialized();
 }
 
 public float getMiddleScreenX(int size) {

@@ -10,6 +10,9 @@ class Menu extends Scene {
 
   Button startButton;
   Button rankingButton;
+
+  Button returnButton;
+
   Button confirmPlayerDataButton;
 
   String loginErrorMessage = "";
@@ -18,10 +21,18 @@ class Menu extends Scene {
     super(sceneId);
     createGetPlayerDataMenu();
     createMainMenu();
+    createRankingMenu();
+  }
+
+  void onInitialized() {
+    currentState = MenuState.GETPLAYERDATA;
+    createGetPlayerDataMenu();
+    createMainMenu();
+    createRankingMenu();
   }
 
   private void createGetPlayerDataMenu() {
-    ranking.createUsernameInput(getMiddleScreenX(100), getMiddleScreenY(30) - 75);
+    ranking.createUsernameInput(getMiddleScreenX(200), getMiddleScreenY(40) - 75);
     ranking.setUsernameVisible(true);
 
     confirmPlayerDataButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), "CONFIRMAR", () -> {
@@ -38,6 +49,7 @@ class Menu extends Scene {
     } else if (inputText.length() > 10) {
       loginErrorMessage = "O nome do jogador está muito grande.";
     } else {
+      loginErrorMessage = "";
       ranking.setPlayerName();
       ranking.setUsernameVisible(false);
       currentState = MenuState.MAINMENU;
@@ -45,6 +57,7 @@ class Menu extends Scene {
   }
 
   private void renderGetPlayerDataMenu() {
+    text("Digite o nome do jogador", 300, getMiddleScreenY(40) - 100);
     textAlign(CENTER);
     textSize(12);
     text(loginErrorMessage, getMiddleScreenX(0), getMiddleScreenY(0) - 40);
@@ -58,7 +71,7 @@ class Menu extends Scene {
 
   private void createMainMenu() {
     startButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), "JOGAR", () -> {
-      currentScreen = 1;
+      changeScreen(1);
     }
     );
 
@@ -81,11 +94,24 @@ class Menu extends Scene {
       rankingButton.onClick();
   }
 
+  private void createRankingMenu() {
+    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 200, "VOLTAR", () -> {
+      currentState = MenuState.MAINMENU;
+    }
+    );
+  }
+
   private void renderRankingMenu() {
-    ranking.createRankingTable(120, 200, 40, 300);
+    textAlign(CENTER);
+    textSize(25);
+    text("Ranking", 300, 80);
+    ranking.createRankingTable(120, 150, 40, 300);
+    returnButton.render();
   }
 
   private void handleRankingMenuClick() {
+    if (returnButton != null && returnButton.detectMouseCollision())
+      returnButton.onClick();
   }
 
   void onKeyPressed(boolean [] keys) {

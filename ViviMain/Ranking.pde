@@ -4,7 +4,7 @@ class Ranking {
   int lineCounter;
   String player="";
   int points = 0;
-  String filePath = "hiscores.csv";
+  String filePath = "data/hiscores.csv";
 
   public void savePoints() {
     table = loadTable(filePath, "header");
@@ -15,7 +15,7 @@ class Ranking {
     table.sortReverse("points");
 
     lineCounter = table.getRowCount();
-    if (lineCounter > 2) {
+    if (lineCounter > 10) {
       table.removeRow(lineCounter-1);
     }
 
@@ -23,9 +23,10 @@ class Ranking {
   }
 
   public void createUsernameInput(float positionX, float positionY) {
-    txtUsername = cp5.addTextfield("Nickname")
+    txtUsername = cp5.addTextfield("")
       .setPosition(positionX, positionY)
-      .setSize(100, 30)
+      .setFont(smallFont) 
+      .setSize(200, 40)
       .setVisible(false);
   }
 
@@ -38,6 +39,7 @@ class Ranking {
     table = loadTable(filePath, "header");
     fill(0);
     textAlign(LEFT);
+    textSize(16);
     int rank = 1;
     for (TableRow row : table.rows()) {
       text(rank + ".", positionX, positionY);
