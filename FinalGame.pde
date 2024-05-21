@@ -4,14 +4,18 @@ class FinalGame extends Scene {
   Player player;
   Game game;
 
+  PImage bg;
+
   FinalGame(int sceneId) {
     super(sceneId);
+    bg = loadImage("sprites/bg-menu-white.png");
   }
 
   void onInitialized() {
     this.game = player.match;
 
     returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 200, "VOLTAR", () -> {
+      click.play();
       changeScreen(0);
     }
     );
@@ -24,16 +28,16 @@ class FinalGame extends Scene {
   }
 
   void onDraw() {
-    fill(0xFFFF7C28);
-    background(255);
+    image(bg, 0, 0);
+    fill(primaryColor);
     textAlign(CENTER);
-    textSize(25);
+    textSize(subtitleSize);
     text("Você fez", 300, 200);
     textAlign(CENTER);
-    textSize(60);
+    textSize(titleSize);
     text(game.points, 300, 300);
     textAlign(CENTER);
-    textSize(25);
+    textSize(subtitleSize);
     text("Pontos", 300, 400);
 
     returnButton.render();

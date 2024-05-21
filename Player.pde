@@ -8,8 +8,8 @@ class Player extends Agent {
     super(startX, startY, new PlayerInput());
     loadImageArchive("sprites/player.png");
     tag = "Player";
-    sizeX = 64;
-    sizeY = 151;
+    sizeX = 82;
+    sizeY = 160;
     this.match = match;
     initializeAgent();
   }

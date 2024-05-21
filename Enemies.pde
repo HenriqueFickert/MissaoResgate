@@ -3,10 +3,10 @@ class House extends Agent {
   House(float startX, float startY)
   {
     super(startX, startY, new EnemyInput());
-    loadImageArchive("sprites/player.png");
+    loadImageArchive("sprites/housesprite.png");
     tag = "Enemy";
-    sizeX = 64;
-    sizeY = 151;
+    sizeX = 110;
+    sizeY = 121;
     initializeAgent();
     speed = 8;
   }
@@ -41,10 +41,11 @@ class Tree extends Agent {
   Tree(float startX, float startY)
   {
     super(startX, startY, new EnemyInput());
-    loadImageArchive("sprites/playbutton.png");
+    loadImageArchive("sprites/arvoresprite.png");
     tag = "Enemy";
-    sizeX = 64;
-    sizeY = 151;
+    sizeX = 95;
+    sizeY = 174;
+    speed = 9;
     initializeAgent();
   }
 

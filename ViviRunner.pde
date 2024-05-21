@@ -16,7 +16,17 @@ public Ranking ranking;
 PFont font;
 PFont smallFont;
 
+color primaryColor = color(255,113,0);
+color blackColor = color(0,0,0);
+color whiteColor = color(255,255,255);
+
+int titleSize = 60;
+int subtitleSize = 25;
+int regularSize = 18;
+int smallSize = 12;
+
 void setup () {
+  loadSounds();
   frameRate(60);
   size(600, 800);
   font = createFont("fonts/PoetsenOne-Regular.ttf", 18);

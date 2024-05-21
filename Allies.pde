@@ -3,10 +3,10 @@ class Cat extends Agent {
   Cat(float startX, float startY)
   {
     super(startX, startY, new EnemyInput());
-    loadImageArchive("sprites/heart.png");
+    loadImageArchive("sprites/catsprites.png");
     tag = "Ally";
     sizeX = 64;
-    sizeY = 151;
+    sizeY = 70;
     initializeAgent();
     speed = 7;
   }

@@ -11,9 +11,12 @@ class Game extends Scene {
   private int flashStartTime = 0;
   private int flashDuration = 100;
 
+  PImage bg;
+
   Game(int sceneId) {
     super(sceneId);
-    healthSprite = loadImage("sprites/heart.png");
+    bg = loadImage("sprites/bg.png");
+    healthSprite = loadImage("sprites/health.png");
     onInitialized();
   }
 
@@ -51,14 +54,14 @@ class Game extends Scene {
   }
 
   private void renderPointsUI() {
-    fill(0);
-    textFont(font, 25);
+    fill(whiteColor);
+    textFont(font, 30);
     text(points, (width - 50) / 2, 25);
   }
 
   private void renderLivesUI() {
-    int heartSizeX = 32;
-    int heartSizeY = 29;
+    int heartSizeX = 25;
+    int heartSizeY = 50;
     int spacing = 10;
     int startX = 10;
     int startY = 10;
@@ -101,7 +104,7 @@ class Game extends Scene {
   }
 
   void drawBackGround() {
-    background(235);
+    image(bg, 0,0);
   }
 
   void startFlashing() {

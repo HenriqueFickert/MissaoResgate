@@ -18,8 +18,11 @@ class Menu extends Scene {
 
   String loginErrorMessage = "";
 
+  PImage bg;
+
   Menu(int sceneId) {
     super(sceneId);
+    bg = loadImage("sprites/bg-menu-white.png");
     menuBg = loadImage("sprites/bgmenu.png");
     createGetPlayerDataMenu();
     createMainMenu();
@@ -36,10 +39,11 @@ class Menu extends Scene {
   }
 
   private void createGetPlayerDataMenu() {
-    ranking.createUsernameInput(getMiddleScreenX(200), getMiddleScreenY(40) - 75);
+    ranking.createUsernameInput(getMiddleScreenX(225), 350);
     ranking.setUsernameVisible(true);
 
-    confirmPlayerDataButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), "CONFIRMAR", () -> {
+    confirmPlayerDataButton = new Button(getMiddleScreenX(150), 435, "CONFIRMAR", () -> {
+      click.play();
       checkConfirmPlayerDataButton();
     }
     );
@@ -50,7 +54,7 @@ class Menu extends Scene {
 
     if (inputText.isEmpty()) {
       loginErrorMessage = "É necessário digitar o nome do jogador.";
-    } else if (inputText.length() > 10) {
+    } else if (inputText.length() > 15) {
       loginErrorMessage = "O nome do jogador está muito grande.";
     } else {
       loginErrorMessage = "";
@@ -61,10 +65,16 @@ class Menu extends Scene {
   }
 
   private void renderGetPlayerDataMenu() {
-    text("Digite o nome do jogador", 300, getMiddleScreenY(40) - 100);
+    fill(primaryColor);
     textAlign(CENTER);
-    textSize(12);
-    text(loginErrorMessage, getMiddleScreenX(0), getMiddleScreenY(0) - 40);
+    textSize(titleSize);
+    text("Vivi ao Resgate", 300, 150);
+    textSize(regularSize);
+    text("Digite o nome do jogador", 300, 330);
+    fill(whiteColor);
+    textAlign(CENTER);
+    textSize(smallSize);
+    text(loginErrorMessage, getMiddleScreenX(0), 405);
     confirmPlayerDataButton.render();
   }
 
@@ -75,17 +85,22 @@ class Menu extends Scene {
 
   private void createMainMenu() {
     startButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), "JOGAR", () -> {
+      click.play();
       changeScreen(1);
     }
     );
 
     rankingButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 75, "RANKING", () -> {
+      click.play();
       currentState = MenuState.RANKINGMENU;
     }
     );
   }
 
   private void renderMainMenu() {
+    textAlign(CENTER);
+    textSize(titleSize);
+    text("Vivi ao Resgate", 300, 80);
     startButton.render();
     rankingButton.render();
   }
@@ -100,6 +115,7 @@ class Menu extends Scene {
 
   private void createRankingMenu() {
     returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 200, "VOLTAR", () -> {
+      click.play();
       currentState = MenuState.MAINMENU;
     }
     );
@@ -108,7 +124,7 @@ class Menu extends Scene {
   private void renderRankingMenu() {
     image(menuBg, getMiddleScreenX(400), getMiddleScreenY(600));
     textAlign(CENTER);
-    textSize(25);
+    textSize(subtitleSize);
     text("Ranking", 300, 80);
     ranking.createRankingTable(120, 150, 40, 300);
     returnButton.render();
@@ -126,7 +142,7 @@ class Menu extends Scene {
   }
 
   void onDraw() {
-    background(255);
+    image(bg, 0, 0);
     switch (currentState) {
     case GETPLAYERDATA:
       renderGetPlayerDataMenu();
@@ -153,6 +169,7 @@ class Menu extends Scene {
       break;
     }
   }
-  
-   void obtainPlayer (Player player){}
+
+  void obtainPlayer (Player player) {
+  }
 }

@@ -8,7 +8,11 @@ class Agent extends WorldObject implements IHittable {
   float speed = 10;
   IAgentInput agentInput;
 
-  PImage[] [] sprites;
+  PImage[] sprites;
+  int currentFrame = 0;
+  int totalFrames;
+  int frameDelay = 10;
+  int frameCount = 0;
 
   Agent(float startX, float startY, IAgentInput agentInput)
   {
@@ -22,9 +26,9 @@ class Agent extends WorldObject implements IHittable {
     changeState(initialState);
   }
 
-  void render()
-  {
-    image(sprite.get(0, 0, sizeX, sizeY)/*sprites[states.indexOf(currentState)][0]*/, positionX, positionY);
+  void render() {
+    image(sprites[currentFrame], positionX, positionY, sizeX, sizeY);
+    updateFrame();
   }
 
   void onDraw()
@@ -61,15 +65,20 @@ class Agent extends WorldObject implements IHittable {
   public void onGetHit(IHittable other) {
   }
 
-  protected void setUpSprites()
-  {
-    sprites = new PImage[0] [0];
-    /*
-    for(int i = 0; i < 9; i++)
-     {
-     for(int j = 0; j < 9; j++){
-     sprites[0][i] = sprite.get(0,0,64,64);
-     }
-     }*/
+  protected void setUpSprites() {
+    totalFrames = sprite.width / sizeX;
+    sprites = new PImage[totalFrames];
+
+    for (int i = 0; i < totalFrames; i++) {
+      sprites[i] = sprite.get(i * sizeX, 0, sizeX, sizeY);
+    }
+  }
+
+  private void updateFrame() {
+    frameCount++;
+    if (frameCount >= frameDelay) {
+      frameCount = 0;
+      currentFrame = (currentFrame + 1) % totalFrames;
+    }
   }
 }

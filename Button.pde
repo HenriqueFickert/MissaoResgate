@@ -5,8 +5,7 @@ class Button extends UIObject {
 
   Button(float startX, float startY, String text, IClickAction action) {
     super(startX, startY, 150, 50, action);
-    loadImageArchive("sprites/playbutton.png");
-    textSize(16);
+    loadImageArchive("sprites/botao-jogo.png");
     this.text = text;
   }
 
@@ -21,13 +20,12 @@ class Button extends UIObject {
     image(sprite, positionX, positionY);
 
     if (useText) {
-      textFont(font, 16);
+      textFont(font, regularSize);
       textAlign(CENTER, CENTER);
-      fill(0xFFFF7C28);
-      textSize(16);
+      fill(whiteColor);
       float textX = positionX + sizeX / 2;
       float textY = positionY + sizeY / 2;
-      text(text, textX, textY);
+      text(text, textX, textY - 5);
     }
   }
 }
