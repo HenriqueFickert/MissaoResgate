@@ -33,6 +33,7 @@ class Player extends Agent {
       if (otherAgent.tag.equals("Enemy")) {
         lives--;
         match.startFlashing();
+        playAudio(hit);
         if (lives <= 0) {
           changeState("DIE");
           ranking.setPoints(match.points);
@@ -41,6 +42,7 @@ class Player extends Agent {
         }
       } else if (otherAgent.tag.equals("Ally"))
       {
+        playAudio(cat);
         match.updatePoints(20);
       }
     }

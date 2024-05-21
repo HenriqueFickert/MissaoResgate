@@ -1,4 +1,4 @@
-class FinalGame extends Scene { //<>//
+class FinalGame extends Scene { //<>// //<>//
 
   Button returnButton;
   Player player;
@@ -14,15 +14,15 @@ class FinalGame extends Scene { //<>//
   void onInitialized() {
     this.game = player.match;
 
-    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 100, "VOLTAR", () -> {
-      click.play();
+    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 150, "VOLTAR", () -> {
+      playAudio(click);
       changeScreen(0);
     }
     );
   }
 
   void onEnter() {
-    gameover.play();
+    playAudio(gameover);
   }
 
   void onKeyPressed(boolean [] keys) {

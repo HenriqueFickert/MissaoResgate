@@ -11,8 +11,10 @@ class Menu extends Scene {
   Button startButton;
   Button rankingButton;
 
+  Button soundButton;
+
   Button returnButton;
-  PImage menuBg;
+  PImage modal;
 
   Button confirmPlayerDataButton;
 
@@ -21,14 +23,20 @@ class Menu extends Scene {
   PImage bg;
   PImage logoImage;
 
+  PImage mute;
+  PImage desmute;
+
   Menu(int sceneId) {
     super(sceneId);
+    mute = loadImage("sprites/mute.png");
+    desmute = loadImage("sprites/desmute.png");
     bg = loadImage("sprites/bg-menu-white.png");
     logoImage = loadImage("sprites/logo.png");
-    menuBg = loadImage("sprites/bgmenu.png");
+    modal = loadImage("sprites/modal.png");
     createGetPlayerDataMenu();
     createMainMenu();
     createRankingMenu();
+    createSoundButton();
   }
 
   void onInitialized() {
@@ -37,10 +45,11 @@ class Menu extends Scene {
     ranking.setUsernameVisible(true);
     createMainMenu();
     createRankingMenu();
+    createSoundButton();
   }
 
   void onEnter() {
-    menuBgm.loop();
+    playLoopAudio(menuBgm);
   }
 
   private void createGetPlayerDataMenu() {
@@ -48,8 +57,29 @@ class Menu extends Scene {
     ranking.setUsernameVisible(true);
 
     confirmPlayerDataButton = new Button(getMiddleScreenX(150), 435, "CONFIRMAR", () -> {
-      click.play();
+      playAudio(click);
       checkConfirmPlayerDataButton();
+    }
+    );
+  }
+
+  private void createSoundButton() {
+    PImage sprite;
+
+    if (volume == 1) {
+      sprite = desmute;
+    } else {
+      sprite = mute;
+    }
+
+    soundButton = new Button(535, 30, 45, 45, sprite, () -> {
+      playAudio(click);
+      if (muteOrDesmute()) {
+        soundButton.sprite = desmute;
+        playLoopAudio(menuBgm);
+      } else {
+        soundButton.sprite = mute;
+      }
     }
     );
   }
@@ -89,13 +119,13 @@ class Menu extends Scene {
 
   private void createMainMenu() {
     startButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50), "JOGAR", () -> {
-      click.play();
+      playAudio(click);
       changeScreen(1);
     }
     );
 
     rankingButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 75, "RANKING", () -> {
-      click.play();
+      playAudio(click);
       currentState = MenuState.RANKINGMENU;
     }
     );
@@ -116,19 +146,19 @@ class Menu extends Scene {
   }
 
   private void createRankingMenu() {
-    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 200, "VOLTAR", () -> {
-      click.play();
+    returnButton = new Button(getMiddleScreenX(150), 700, "VOLTAR", () -> {
+      playAudio(click);
       currentState = MenuState.MAINMENU;
     }
     );
   }
 
   private void renderRankingMenu() {
-    image(menuBg, getMiddleScreenX(400), getMiddleScreenY(600));
-    textAlign(CENTER);
-    textSize(subtitleSize);
-    text("Ranking", 300, 80);
-    ranking.createRankingTable(120, 150, 40, 300);
+    image(modal, getMiddleScreenX(400), getMiddleScreenY(500) + 30);
+    fill(primaryColor);
+    textSize(titleSize);
+    text("RANKING", 300, 125);
+    ranking.createRankingTable(140, 250, 40, 250);
     returnButton.render();
   }
 
@@ -145,6 +175,7 @@ class Menu extends Scene {
 
   void onDraw() {
     image(bg, 0, 0);
+    soundButton.render();
     switch (currentState) {
     case GETPLAYERDATA:
       renderGetPlayerDataMenu();
@@ -159,6 +190,9 @@ class Menu extends Scene {
   }
 
   void onClick() {
+    if (soundButton != null && soundButton.detectMouseCollision())
+      soundButton.onClick();
+
     switch (currentState) {
     case GETPLAYERDATA:
       handleGetPlayerDataClick();

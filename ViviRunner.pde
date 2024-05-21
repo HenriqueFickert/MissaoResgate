@@ -27,6 +27,7 @@ int smallSize = 12;
 
 void setup () {
   loadSounds();
+  setVolume();
   frameRate(60);
   size(600, 800);
   font = createFont("fonts/PoetsenOne-Regular.ttf", 18);

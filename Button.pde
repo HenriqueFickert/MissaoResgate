@@ -4,9 +4,14 @@ class Button extends UIObject {
   String text = "";
 
   Button(float startX, float startY, String text, IClickAction action) {
-    super(startX, startY, 150, 50, action);
+    super(startX, startY, 150, 45, action);
     loadImageArchive("sprites/botao-jogo.png");
     this.text = text;
+  }
+
+  Button(float startX, float startY, int sizeX, int sizeY, PImage sprite, IClickAction action) {
+    super(startX, startY, sizeX, sizeY, action);
+    this.sprite = sprite;
   }
 
   Button(String imagepath, boolean useText, float startX, float startY, String text, IClickAction action) {
@@ -25,7 +30,7 @@ class Button extends UIObject {
       fill(whiteColor);
       float textX = positionX + sizeX / 2;
       float textY = positionY + sizeY / 2;
-      text(text, textX, textY - 5);
+      text(text, textX, textY);
     }
   }
 }

@@ -29,7 +29,7 @@ class Game extends Scene {
   }
 
   void onEnter() {
-    gameplayBgm.loop();
+    playLoopAudio(gameplayBgm);
   }
 
   void onClick() {
