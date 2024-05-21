@@ -28,6 +28,10 @@ class Game extends Scene {
     lastCheck = 0;
   }
 
+  void onEnter() {
+    gameplayBgm.loop();
+  }
+
   void onClick() {
   }
 
@@ -104,7 +108,7 @@ class Game extends Scene {
   }
 
   void drawBackGround() {
-    image(bg, 0,0);
+    image(bg, 0, 0);
   }
 
   void startFlashing() {
@@ -121,6 +125,10 @@ class Game extends Scene {
       isFlashing = false;
     }
   }
-  
-  void obtainPlayer (Player player){}
+
+  void obtainPlayer (Player player) {
+  }
+
+  void onExit() {
+  }
 }

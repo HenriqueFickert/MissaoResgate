@@ -16,9 +16,9 @@ public Ranking ranking;
 PFont font;
 PFont smallFont;
 
-color primaryColor = color(255,113,0);
-color blackColor = color(0,0,0);
-color whiteColor = color(255,255,255);
+color primaryColor = color(255, 113, 0);
+color blackColor = color(0, 0, 0);
+color whiteColor = color(255, 255, 255);
 
 int titleSize = 60;
 int subtitleSize = 25;
@@ -34,6 +34,7 @@ void setup () {
   cp5 = new ControlP5(this);
   ranking = new Ranking();
   scenes = new Scene[]{new Menu(0), new Game(1), new FinalGame(2)};
+  changeScreen(0);
 }
 
 void draw() {
@@ -57,14 +58,18 @@ void keyReleased() {
 }
 
 public void changeScreen(int index) {
+  scenes[currentScreen].onExit();
   currentScreen = index;
   scenes[currentScreen].onInitialized();
+  scenes[currentScreen].onEnter();
 }
 
 public void changeScreenPlayer(int index, Player player) {
+  scenes[currentScreen].onExit();
   currentScreen = index;
   scenes[currentScreen].obtainPlayer(player);
   scenes[currentScreen].onInitialized();
+  scenes[currentScreen].onEnter();
 }
 
 

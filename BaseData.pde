@@ -73,7 +73,9 @@ public abstract class Scene {
   }
 
   public abstract void onInitialized();
-  
+
+  public abstract void onEnter();
+
   public abstract void obtainPlayer(Player player);
 
   protected abstract void onClick();
@@ -83,6 +85,8 @@ public abstract class Scene {
   protected abstract void onKeyReleased(boolean [] keys);
 
   protected abstract void onDraw();
+
+  public abstract void onExit();
 }
 
 public abstract class State {

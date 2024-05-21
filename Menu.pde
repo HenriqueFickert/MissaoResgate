@@ -19,10 +19,12 @@ class Menu extends Scene {
   String loginErrorMessage = "";
 
   PImage bg;
+  PImage logoImage;
 
   Menu(int sceneId) {
     super(sceneId);
     bg = loadImage("sprites/bg-menu-white.png");
+    logoImage = loadImage("sprites/logo.png");
     menuBg = loadImage("sprites/bgmenu.png");
     createGetPlayerDataMenu();
     createMainMenu();
@@ -31,11 +33,14 @@ class Menu extends Scene {
 
   void onInitialized() {
     currentState = MenuState.GETPLAYERDATA;
-
     ranking.txtUsername.setText("");
     ranking.setUsernameVisible(true);
     createMainMenu();
     createRankingMenu();
+  }
+
+  void onEnter() {
+    menuBgm.loop();
   }
 
   private void createGetPlayerDataMenu() {
@@ -65,10 +70,9 @@ class Menu extends Scene {
   }
 
   private void renderGetPlayerDataMenu() {
+    image(logoImage, getMiddleScreenX(447), 125);
     fill(primaryColor);
     textAlign(CENTER);
-    textSize(titleSize);
-    text("Vivi ao Resgate", 300, 150);
     textSize(regularSize);
     text("Digite o nome do jogador", 300, 330);
     fill(whiteColor);
@@ -98,9 +102,7 @@ class Menu extends Scene {
   }
 
   private void renderMainMenu() {
-    textAlign(CENTER);
-    textSize(titleSize);
-    text("Vivi ao Resgate", 300, 80);
+    image(logoImage, getMiddleScreenX(447), 125);
     startButton.render();
     rankingButton.render();
   }
@@ -171,5 +173,9 @@ class Menu extends Scene {
   }
 
   void obtainPlayer (Player player) {
+  }
+
+  void onExit() {
+    menuBgm.stop();
   }
 }

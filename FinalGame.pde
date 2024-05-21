@@ -1,4 +1,4 @@
-class FinalGame extends Scene {
+class FinalGame extends Scene { //<>//
 
   Button returnButton;
   Player player;
@@ -14,11 +14,15 @@ class FinalGame extends Scene {
   void onInitialized() {
     this.game = player.match;
 
-    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 200, "VOLTAR", () -> {
+    returnButton = new Button(getMiddleScreenX(150), getMiddleScreenY(50) + 100, "VOLTAR", () -> {
       click.play();
       changeScreen(0);
     }
     );
+  }
+
+  void onEnter() {
+    gameover.play();
   }
 
   void onKeyPressed(boolean [] keys) {
@@ -29,17 +33,18 @@ class FinalGame extends Scene {
 
   void onDraw() {
     image(bg, 0, 0);
+    textAlign(CENTER);
     fill(primaryColor);
-    textAlign(CENTER);
-    textSize(subtitleSize);
-    text("Você fez", 300, 200);
-    textAlign(CENTER);
     textSize(titleSize);
-    text(game.points, 300, 300);
-    textAlign(CENTER);
+    text("FIM DE JOGO", 300, 125);
+    textSize(subtitleSize);
+    text("Você fez", 300, 250);
+    fill(whiteColor);
+    textSize(titleSize + 20);
+    text(game.points, 300, 350);
+    fill(primaryColor);
     textSize(subtitleSize);
     text("Pontos", 300, 400);
-
     returnButton.render();
   }
 
@@ -50,5 +55,10 @@ class FinalGame extends Scene {
 
   void obtainPlayer (Player player) {
     this.player = player;
+  }
+
+  void onExit() {
+    gameplayBgm.stop();
+    gameover.stop();
   }
 }
