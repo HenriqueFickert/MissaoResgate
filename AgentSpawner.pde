@@ -5,6 +5,8 @@ class AgentSpawner {
   int boostIncreaseInterval = 10000;
   int lastBoostIncreaseTime;
 
+  float boostVelocity = 0;
+
   AgentSpawner() {
     agents = new ArrayList<Agent>();
     initializeSpots();
@@ -72,7 +74,8 @@ class AgentSpawner {
     } else {
       newAgent = new Cat(spotsX[columnIndex], -100);
     }
-
+    
+    newAgent.boostVelocity(boostVelocity);
     agents.add(newAgent);
   }
 
@@ -88,8 +91,11 @@ class AgentSpawner {
   }
 
   void increaseBoostVelocity() {
+    boostVelocity += 1;
+    println(boostVelocity);
+    
     for (Agent agent : agents) {
-      agent.boostVelocity += 0.1; 
+      agent.boostVelocity(boostVelocity);
     }
   }
 }
