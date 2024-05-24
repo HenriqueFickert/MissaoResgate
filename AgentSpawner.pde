@@ -2,11 +2,14 @@ class AgentSpawner {
   public ArrayList<Agent> agents;
   int[] spotsX = new int[4];
   int lastSpawnTime;
+  int boostIncreaseInterval = 10000;
+  int lastBoostIncreaseTime;
 
   AgentSpawner() {
     agents = new ArrayList<Agent>();
     initializeSpots();
     lastSpawnTime = millis();
+    lastBoostIncreaseTime = millis();
   }
 
   void initializeSpots() {
@@ -28,6 +31,11 @@ class AgentSpawner {
         poolingAgents((int) random(spotsX.length));
       }
       lastSpawnTime = millis();
+    }
+
+    if (millis() - lastBoostIncreaseTime > boostIncreaseInterval) {
+      increaseBoostVelocity();
+      lastBoostIncreaseTime = millis();
     }
 
     for (Agent agent : agents) {
@@ -77,5 +85,11 @@ class AgentSpawner {
 
     poolingAgents(firstColumn);
     poolingAgents(secondColumn);
+  }
+
+  void increaseBoostVelocity() {
+    for (Agent agent : agents) {
+      agent.boostVelocity += 0.1; 
+    }
   }
 }

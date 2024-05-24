@@ -14,6 +14,8 @@ class Agent extends WorldObject implements IHittable {
   int frameDelay = 10;
   int frameCount = 0;
 
+  public float boostVelocity = 0;
+
   Agent(float startX, float startY, IAgentInput agentInput)
   {
     super(startX, startY);
@@ -80,5 +82,9 @@ class Agent extends WorldObject implements IHittable {
       frameCount = 0;
       currentFrame = (currentFrame + 1) % totalFrames;
     }
+  }
+  
+  public void boostVelocity(float boostVelocity){
+    this.boostVelocity = boostVelocity; 
   }
 }

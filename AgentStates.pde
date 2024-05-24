@@ -72,7 +72,7 @@ class RunVertical extends Run {
       return;
     }
 
-    float newPositionY = agent.positionY + agent.speed * agent.agentInput.getDirection();
+    float newPositionY = agent.positionY + (agent.speed + agent.boostVelocity) * agent.agentInput.getDirection();
     agent.positionY = newPositionY;
   }
 
