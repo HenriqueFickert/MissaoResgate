@@ -74,7 +74,7 @@ class AgentSpawner {
     } else {
       newAgent = new Cat(spotsX[columnIndex], -100);
     }
-    
+
     newAgent.boostVelocity(boostVelocity);
     agents.add(newAgent);
   }
@@ -92,8 +92,7 @@ class AgentSpawner {
 
   void increaseBoostVelocity() {
     boostVelocity += 1;
-    println(boostVelocity);
-    
+
     for (Agent agent : agents) {
       agent.boostVelocity(boostVelocity);
     }
